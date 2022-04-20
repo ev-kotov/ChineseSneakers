@@ -1,0 +1,18 @@
+<h1>Наша коллекция кросовок</h1>
+
+<div class="row mt-5 mb-2">
+    @{
+        foreach (var sneakersModel in Model.Sneakerses)
+        {
+            <div class="col-lg-4">
+                <img class="img-thumbnail" src="@sneakersModel.Image" alt="@sneakersModel.Name.">
+                <h2>@sneakersModel.Brand @sneakersModel.Name</h2>
+                <p>@sneakersModel.ShortDescription</p>
+                <p>Стоимость: @sneakersModel.Price.ToString("c")</p>
+                <p>
+                    <a class="btn btn-warning" href="#">Подробнее</a>
+                </p>
+            </div>
+        }
+    }
+</div>
