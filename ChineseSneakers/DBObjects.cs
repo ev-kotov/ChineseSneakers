@@ -12,7 +12,7 @@ public class DBObjects
         if (!context.SneakersModel.Any())
         {
             context.AttachRange(
-                new SneakersModel()
+                new SneakersModel
                 {
                     Article = "979419120039",
                     Name = "JLIN2 LIGHT",
@@ -27,7 +27,7 @@ public class DBObjects
                     Available = true,
                     SneakersCategoryModel = Categories["Повседневные"]
                 },
-                new SneakersModel()
+                new SneakersModel
                 {
                     Article = "822218084-8",
                     Name = "BADAO 3.0",
@@ -42,14 +42,14 @@ public class DBObjects
                     Available = false,
                     SneakersCategoryModel = Categories["Повседневные"]
                 },
-                new SneakersModel()
+                new SneakersModel
                 {
                     Article = "ARRS003",
                     Name = "SHADOW ESSENTIAL BOOM JIANG",
                     Brand = "Li-Ning",
                     Size = 42,
                     Female = "Man",
-                    ShortDescription = "Суперскоростные кросы",
+                    ShortDescription = "Суперскоростные кросcы",
                     LongDescription = "",
                     Image = "/img/Li-Ning-SHADOW-ESSENTIAL-BOOM-JIANG.webp",
                     Price = 10370,
@@ -57,7 +57,7 @@ public class DBObjects
                     Available = true,
                     SneakersCategoryModel = Categories["Беговые"]
                 },
-                new SneakersModel()
+                new SneakersModel
                 {
                     Article = "00001",
                     Name = "Q-KUNGFU PRO",
@@ -72,7 +72,7 @@ public class DBObjects
                     Available = false,
                     SneakersCategoryModel = Categories["Беговые"]
                 },
-                new SneakersModel()
+                new SneakersModel
                 {
                     Article = "00002",
                     Name = "LooserJet",
@@ -87,7 +87,7 @@ public class DBObjects
                     Available = true,
                     SneakersCategoryModel = Categories["Беговые"]
                 },
-                new SneakersModel()
+                new SneakersModel
                 {
                     Article = "00003",
                     Name = "Part1",
@@ -104,7 +104,6 @@ public class DBObjects
                 });
 
         }
-
         context.SaveChanges();
     }
 
@@ -129,7 +128,6 @@ public class DBObjects
                     _categories.Add(i.Name, i);
                 }
             }
-
             return _categories;
         }
     }

@@ -4,17 +4,17 @@ namespace ChineseSneakers.Models;
 
 public class ShopCartModel
 {
-    private readonly MyAppDbContext _myAppDbContext;
+    private readonly MyAppDbContext? _myAppDbContext;
 
-    public ShopCartModel(MyAppDbContext myAppDbContext) => _myAppDbContext = myAppDbContext;
+    public ShopCartModel(MyAppDbContext? myAppDbContext) => _myAppDbContext = myAppDbContext;
 
     private string ShopCartId { get; set; }
     public List<ShopCartItemModel> ShopCartItemModels { get; set; }
 
-    public static ShopCartModel GetShopCartModel(IServiceProvider service)
+    public static ShopCartModel GetShopCartModel(IServiceProvider serviceProvider)
     {
-        ISession session = service.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-        var context = service.GetService<MyAppDbContext>();
+        ISession? session = serviceProvider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+        var context = serviceProvider.GetService<MyAppDbContext>();
         
         string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
         session.SetString("CartId", shopCartId);

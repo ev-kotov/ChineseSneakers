@@ -1,5 +1,6 @@
 using ChineseSneakers.Interfaces;
 using ChineseSneakers.Models;
+using ChineseSneakers.Repository;
 using ChineseSneakers.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +10,13 @@ public class ShopCartController : Controller
 {
     private readonly ISneakerses _sneakerses;
     private readonly ShopCartModel _shopCartModel;
-    // GET
     public ShopCartController(ISneakerses sneakerses, ShopCartModel shopCartModel)
     {
         _sneakerses = sneakerses;
         _shopCartModel = shopCartModel;
     }
 
-    public IActionResult Index()
+    public ViewResult Index()
     {
         _shopCartModel.ShopCartItemModels = _shopCartModel.GetShopCartItemModels();
         var obj = new ShopCartViewModel

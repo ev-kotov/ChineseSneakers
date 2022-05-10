@@ -10,10 +10,7 @@ public class HomeController : Controller
 {
     private readonly ISneakerses _sneakerses;
 
-    public HomeController(ISneakerses sneakerses)
-    {
-        _sneakerses = sneakerses;
-    }
+    public HomeController(ISneakerses sneakerses) => _sneakerses = sneakerses;
 
     public IActionResult Index()
     {

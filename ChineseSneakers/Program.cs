@@ -15,36 +15,28 @@ builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo("DataProtectionKeys"));
 
 builder.Services.AddTransient<ISneakerses, SneakersesRepository>();
-
+builder.Services.AddTransient<ISneakersCategory, SneakersCategoryRepository>();
+builder.Services.AddTransient<IOrder, OrderRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => ShopCartModel.GetShopCartModel(sp));
-
-builder.Services.AddTransient<ISneakersCategory, SneakersCategoryRepository>();
-
 builder.Services.AddControllersWithViews();
+builder.Services.AddMvc();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
-using (var serviceScope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
-    MyAppDbContext context = serviceScope.ServiceProvider.GetRequiredService<MyAppDbContext>();
+    MyAppDbContext context = scope.ServiceProvider.GetRequiredService<MyAppDbContext>();
     DBObjects.Initial(context);
-}
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
