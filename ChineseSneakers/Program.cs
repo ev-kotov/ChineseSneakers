@@ -25,20 +25,26 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 
 var app = builder.Build();
-
 using (var scope = app.Services.CreateScope())
 {
     MyAppDbContext context = scope.ServiceProvider.GetRequiredService<MyAppDbContext>();
     DBObjects.Initial(context);
 }
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
+
 app.UseAuthorization();
+
 app.MapControllerRoute(
-    name: "default",
+    name: "default", // главная страница
+    // По-умолчанию (если не указан иной адрес): Контроллер - Home, метод контроллера - Index
+    // По-умолчанию необязательный - id
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "categoryFilter",
+    pattern: "{controller=Sneakers}/{action=List}/{category?}");
 
 app.Run();

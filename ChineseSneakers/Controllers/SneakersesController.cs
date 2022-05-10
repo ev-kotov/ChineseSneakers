@@ -18,30 +18,38 @@ public class SneakersesController : Controller
     }
 
     [Route("Sneakerses/List")]
-    [Route("Sneakerses/List/{url}")]
-    public IActionResult List(string url)
+    [Route("Sneakerses/List/{category}")]
+    public IActionResult List(string category)
     {
+        string _category = category;
         IEnumerable<SneakersModel>? sneakerses = null;
-        string currCategory = "Кроссовки";
+        string currCategory = "";
         
-        if(string.IsNullOrEmpty(url))
+        if(string.IsNullOrEmpty(category)) // выводим все кроссы
         {
-            sneakerses = _sneakerses.SneakersModels.OrderBy(sm => sm.Price);
+            sneakerses = _sneakerses.SneakersModels.OrderBy(sm => sm.Id);
         }
-        if(string.Equals("running",url,StringComparison.OrdinalIgnoreCase))
+        else
         {
-            sneakerses = _sneakerses.SneakersModels.Where(sm => sm.SneakersCategoryModel.Name.Equals("Беговые")).OrderBy(sm => sm.Price);
+            if(string.Equals("running",category,StringComparison.OrdinalIgnoreCase))
+            {
+                sneakerses = _sneakerses.SneakersModels.Where(sm => sm.SneakersCategoryModel.Name.Equals("Беговые")).OrderBy(sm => sm.Id);
+                currCategory = "Беговые";
+            }
+        
+            if(string.Equals("usually",category, StringComparison.OrdinalIgnoreCase))
+            {
+                sneakerses = _sneakerses.SneakersModels.Where(sm => sm.SneakersCategoryModel.Name.Equals("Повседневные")).OrderBy(sm => sm.Id);
+                currCategory = "Повседневные";
+            }
+        
+            if(string.Equals("basketball",category, StringComparison.OrdinalIgnoreCase))
+            {
+                sneakerses = _sneakerses.SneakersModels.Where(sm => sm.SneakersCategoryModel.Name.Equals("Баскетбол")).OrderBy(sm => sm.Id);
+                currCategory = "Баскетбол";
+            }
         }
         
-        if(string.Equals("usually",url, StringComparison.OrdinalIgnoreCase))
-        {
-            sneakerses = _sneakerses.SneakersModels.Where(sm => sm.SneakersCategoryModel.Name.Equals("Повседневные")).OrderBy(sm => sm.Price);
-        }
-        
-        if(string.Equals("basketball",url, StringComparison.OrdinalIgnoreCase))
-        {
-            sneakerses = _sneakerses.SneakersModels.Where(sm => sm.SneakersCategoryModel.Name.Equals("Баскетбол")).OrderBy(sm => sm.Price);
-        }
         
         var obj = new SneakersesViewModel()
         {

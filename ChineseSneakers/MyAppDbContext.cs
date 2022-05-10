@@ -12,5 +12,5 @@ public class MyAppDbContext : DbContext
     public DbSet<SneakersCategoryModel> SneakersCategoryModel { get; set; }
     public DbSet<ShopCartItemModel> ShopCartItemModel { get; set; }
     public DbSet<OrderModel> OrderModel { get; set; }
-    public DbSet<PaymentModel> PaymentModel { get; set; }
+    public DbSet<OrderDetailModel> PaymentModel { get; set; }
 }

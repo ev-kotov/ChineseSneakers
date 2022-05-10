@@ -16,21 +16,21 @@ public class OrderRepository : IOrder
 
     public void CreateOrder(OrderModel orderModel)
     {
-        orderModel.OrderTime = DateTime.Now;
-        _myAppDbContext.OrderModel.Add(orderModel);
+        orderModel.OrderTime = DateTime.Now; 
+        _myAppDbContext.OrderModel.Add(orderModel); // добавить заказ
         _myAppDbContext.SaveChanges();
 
-        var items = _shopСartModel.GetShopCartItemModels();
+        var items = _shopСartModel.GetShopCartItemModels(); // получить все товары корзины
 
         foreach (var i in items)
         {
-            var pm = new PaymentModel()
+            var orderDetailModel = new OrderDetailModel()
             {
                 SneakersId = i.SneakersModel.Id,
-                PaymentId = orderModel.Id,
+                OrderId = orderModel.Id,
                 Price = i.SneakersModel.Price
             };
-            _myAppDbContext.PaymentModel.Add(pm);
+            _myAppDbContext.PaymentModel.Add(orderDetailModel); // добавим в БД
         }
         _myAppDbContext.SaveChanges();
     }

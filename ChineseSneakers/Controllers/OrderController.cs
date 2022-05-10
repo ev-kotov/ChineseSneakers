@@ -15,7 +15,7 @@ public class OrderController : Controller
         _shopCartModel = shopCartModel;
     }
 
-    public IActionResult CheckOut()
+    public IActionResult CheckOut() // Функция IActionResult позволяет принимать данные
     {
         return View();
     }

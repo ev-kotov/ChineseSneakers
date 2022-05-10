@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ChineseSneakers.Models;
 
-public class OrderModel
+public class OrderModel // заказ
 {
     [BindNever]
     public int Id { get; set; }
@@ -20,7 +20,7 @@ public class OrderModel
     [Display(Name = "Введите адрес")]
     [StringLength(20)]
     [Required(ErrorMessage = "Данная строка не может быть пустой")]
-    public string? Adress { get; set; }
+    public string? Address { get; set; }
     
     [Display(Name = "Номер телефона")]
     [StringLength(20)]
@@ -35,6 +35,6 @@ public class OrderModel
     [BindNever]
     [ScaffoldColumn(false)]
     public DateTime OrderTime { get; set; }
-    public List<PaymentModel>? Payments { get; set; }
+    public List<OrderDetailModel>? Payments { get; set; }
 
 }
