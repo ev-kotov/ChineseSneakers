@@ -19,7 +19,7 @@ public class HomeController : Controller
     {
         var favSneakers = new HomeViewModel
         {
-            FavoriteSneakerses = _sneakerses.GetFavoriteSneakersModels
+            FavoriteSneakerses = _sneakerses.FavoriteSneakersModels
         };
         return View(favSneakers);
     }

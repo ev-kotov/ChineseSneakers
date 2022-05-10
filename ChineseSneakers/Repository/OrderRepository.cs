@@ -5,26 +5,33 @@ namespace ChineseSneakers.Repository;
 
 public class OrderRepository : IOrder
 {
-    private readonly AppDbContext _appDbContext;
-    private readonly ShoppingСart _shoppingСart;
+    private readonly MyAppDbContext _myAppDbContext;
+    private readonly ShopCartModel _shopСartModel;
 
-    public OrderRepository(AppDbContext appDbContext, ShoppingСart shoppingСart)
+    public OrderRepository(MyAppDbContext myAppDbContext, ShopCartModel shopСartModel)
     {
-        _appDbContext = appDbContext;
-        _shoppingСart = shoppingСart;
+        _myAppDbContext = myAppDbContext;
+        _shopСartModel = shopСartModel;
     }
 
-    public void CreateOrder(Order order)
+    public void CreateOrder(OrderModel orderModel)
     {
-        order.OrderTime = DateTime.Now;
-        _appDbContext.Order.Add(order);
-        _appDbContext.SaveChanges();
+        orderModel.OrderTime = DateTime.Now;
+        _myAppDbContext.OrderModel.Add(orderModel);
+        _myAppDbContext.SaveChanges();
 
-        var item = _shoppingСart.ListShoppingItems();
+        var items = _shopСartModel.GetShopCartItemModels();
 
-        foreach (var el in item)
+        foreach (var i in items)
         {
-            var 
+            var pm = new PaymentModel()
+            {
+                SneakersId = i.SneakersModel.Id,
+                PaymentId = orderModel.Id,
+                Price = i.SneakersModel.Price
+            };
+            _myAppDbContext.PaymentModel.Add(pm);
         }
+        _myAppDbContext.SaveChanges();
     }
 }

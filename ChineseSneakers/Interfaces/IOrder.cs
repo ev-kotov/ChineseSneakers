@@ -4,5 +4,5 @@ namespace ChineseSneakers.Interfaces;
 
 public interface IOrder
 {
-    void CreateOrder(Order order);
+    void CreateOrder(OrderModel orderModel);
 }

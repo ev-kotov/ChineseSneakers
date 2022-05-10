@@ -1,11 +1,13 @@
+using ChineseSneakers.Models;
+
 namespace ChineseSneakers;
 
 public class DBObjects
 {
     public static void Initial(MyAppDbContext context)
     {
-        if (!context.CategoryModel.Any())
-            context.CategoryModel.AddRange(Categories.Select(c => c.Value));
+        if (!context.SneakersCategoryModel.Any())
+            context.SneakersCategoryModel.AddRange(Categories.Select(c => c.Value));
 
         if (!context.SneakersModel.Any())
         {
@@ -23,7 +25,7 @@ public class DBObjects
                     Price = 11224.30,
                     IsFavorite = true,
                     Available = true,
-                    SneakersCategory = Categories["Повседневные"]
+                    SneakersCategoryModel = Categories["Повседневные"]
                 },
                 new SneakersModel()
                 {
@@ -38,7 +40,7 @@ public class DBObjects
                     Price = 11360,
                     IsFavorite = false,
                     Available = false,
-                    SneakersCategory = Categories["Повседневные"]
+                    SneakersCategoryModel = Categories["Повседневные"]
                 },
                 new SneakersModel()
                 {
@@ -53,7 +55,7 @@ public class DBObjects
                     Price = 10370,
                     IsFavorite = true,
                     Available = true,
-                    SneakersCategory = Categories["Беговые"]
+                    SneakersCategoryModel = Categories["Беговые"]
                 },
                 new SneakersModel()
                 {
@@ -68,7 +70,7 @@ public class DBObjects
                     Price = 12000,
                     IsFavorite = true,
                     Available = false,
-                    SneakersCategory = Categories["Беговые"]
+                    SneakersCategoryModel = Categories["Беговые"]
                 },
                 new SneakersModel()
                 {
@@ -83,7 +85,7 @@ public class DBObjects
                     Price = 15000,
                     IsFavorite = true,
                     Available = true,
-                    SneakersCategory = Categories["Беговые"]
+                    SneakersCategoryModel = Categories["Беговые"]
                 },
                 new SneakersModel()
                 {
@@ -98,7 +100,7 @@ public class DBObjects
                     Price = 7000,
                     IsFavorite = false,
                     Available = true,
-                    SneakersCategory = Categories["Беговые"]
+                    SneakersCategoryModel = Categories["Беговые"]
                 });
 
         }

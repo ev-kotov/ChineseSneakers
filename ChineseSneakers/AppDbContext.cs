@@ -5,5 +5,5 @@ namespace ChineseSneakers;
 
 public class AppDbContext :DbContext
 {
-    public DbSet<Order> Order { get; set; }
+    public DbSet<OrderModel> Order { get; set; }
 }

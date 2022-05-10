@@ -4,5 +4,5 @@ namespace ChineseSneakers.Interfaces;
 
 public interface ISneakersCategory
 {
-    IEnumerable<SneakersCategoryModel> SneakersCategoryModels { get; }
+    IEnumerable<SneakersCategoryModel> SneakersModelsCategory { get; }
 }

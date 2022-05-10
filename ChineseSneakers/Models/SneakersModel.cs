@@ -16,5 +16,5 @@ public class SneakersModel
     public bool Available { get; set; }
         
     public int CategoryId { get; set; }
-    public SneakersCategoryModel SneakersCategory { get; set; }
+    public SneakersCategoryModel SneakersCategoryModel { get; set; }
 }
