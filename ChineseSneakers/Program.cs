@@ -12,7 +12,7 @@ builder.Services.AddDbContext<MyAppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString") ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.")));
 
 builder.Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("DataProtectionKeys"));
+    .PersistKeysToFileSystem(new DirectoryInfo("DataProtectionKeys")); // добавим DataProtectionKeys
 
 builder.Services.AddTransient<ISneakerses, SneakersesRepository>();
 builder.Services.AddTransient<ISneakersCategory, SneakersCategoryRepository>();
