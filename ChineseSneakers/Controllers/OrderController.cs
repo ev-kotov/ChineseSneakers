@@ -21,21 +21,25 @@ public class OrderController : Controller
     }
     
     [HttpPost]
-    public IActionResult CheckOut(OrderModel orderModel)
+    public IActionResult CheckOut(OrderModel orderModel) // принимаем только post
     {
-        _shopCartModel.ShopCartItemModels = _shopCartModel.GetShopCartItemModels();
+        _shopCartModel.ShopCartItemModels = _shopCartModel.GetShopCartItemModels(); // передаем товары в переменную
         
         if(_shopCartModel.ShopCartItemModels.Count == 0)
         {
-            ModelState.AddModelError("","Товары отсутствуют!");
+            ModelState.AddModelError("","В корзине отсутствуют товары !");
         }
-  
-        _iOrder.CreateOrder(orderModel);
-        return RedirectToAction("Complete");
+
+        if (ModelState.IsValid) // все проверки пройдены?
+        {
+            _iOrder.CreateOrder(orderModel); // создаем заказ
+            return RedirectToAction("Complete");
+        }
+        return View(orderModel); // перезагрузить страницу заказа, т.к. проверки не пройдены
     }
     public ViewResult Complete()
     {
-        ViewBag.Message = "Заказ успешно обработан";
+        ViewBag.Message = "Заказ успешно обработан. Ожидайте подтверждения.";
         return View();
     }
 }

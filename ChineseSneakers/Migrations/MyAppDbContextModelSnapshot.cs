@@ -22,6 +22,38 @@ namespace ChineseSneakers.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ChineseSneakers.Models.OrderDetailModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderModelId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("SneakersId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SneakersModelId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderModelId");
+
+                    b.HasIndex("SneakersModelId");
+
+                    b.ToTable("PaymentModel");
+                });
+
             modelBuilder.Entity("ChineseSneakers.Models.OrderModel", b =>
                 {
                     b.Property<int>("Id")
@@ -30,7 +62,7 @@ namespace ChineseSneakers.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Adress")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -61,38 +93,6 @@ namespace ChineseSneakers.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OrderModel");
-                });
-
-            modelBuilder.Entity("ChineseSneakers.Models.PaymentModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("OrderModelId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("SneakersId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SneakersModelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderModelId");
-
-                    b.HasIndex("SneakersModelId");
-
-                    b.ToTable("PaymentModel");
                 });
 
             modelBuilder.Entity("ChineseSneakers.Models.ShopCartItemModel", b =>
@@ -192,10 +192,10 @@ namespace ChineseSneakers.Migrations
                     b.ToTable("SneakersModel");
                 });
 
-            modelBuilder.Entity("ChineseSneakers.Models.PaymentModel", b =>
+            modelBuilder.Entity("ChineseSneakers.Models.OrderDetailModel", b =>
                 {
                     b.HasOne("ChineseSneakers.Models.OrderModel", "OrderModel")
-                        .WithMany("Payments")
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderModelId");
 
                     b.HasOne("ChineseSneakers.Models.SneakersModel", "SneakersModel")
@@ -227,7 +227,7 @@ namespace ChineseSneakers.Migrations
 
             modelBuilder.Entity("ChineseSneakers.Models.OrderModel", b =>
                 {
-                    b.Navigation("Payments");
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
