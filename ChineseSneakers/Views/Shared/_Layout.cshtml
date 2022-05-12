@@ -39,6 +39,11 @@
                         <a class="nav-link" asp-controller="ShopCart" asp-action="Index" >Корзина</a>
                     </li>
                 </ul>
+                
+                <form class="d-flex" method="get" asp-controller="Home" asp-action="Index">
+                    <input value="@ViewData["GetEmployeeDetails"]" name="EmpSearch" class="form-control me-2" type="search" placeholder="Что найти?" aria-label="Search">
+                    <button value="Search" class="btn btn-outline-success" type="submit">Поиск</button>
+                    </form>
 
             </div>
         </div>
