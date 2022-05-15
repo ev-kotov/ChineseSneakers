@@ -7,9 +7,19 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// добавляет только те сервисы фреймворка MVC, которые позволяют использовать контроллеры и представления
+// и связанную функциональность. При создании проекта по типу ASP.NET Core Web App (Model-View-Controller)
+// используется именно этот метод
+builder.Services.AddControllersWithViews();
+
+// добавляет все сервисы фреймворка MVC (в том числе сервисы для работы с аутентификацией и авторизацией, валидацией и т.д.)
+//builder.Services.AddMvc();
+
 // Add services to the container.
 builder.Services.AddDbContext<MyAppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString") ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.")));
+
+builder.Services.AddControllers(); // добавляем поддержку контроллеров MVC
 
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo("DataProtectionKeys")); // добавим DataProtectionKeys
@@ -19,8 +29,9 @@ builder.Services.AddTransient<ISneakersCategory, SneakersCategoryRepository>();
 builder.Services.AddTransient<IOrder, OrderRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => ShopCartModel.GetShopCartModel(sp));
-builder.Services.AddControllersWithViews();
-builder.Services.AddMvc();
+
+
+
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 
@@ -37,6 +48,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// устанавливаем сопоставление маршрутов с контроллерами
 app.MapControllerRoute(
     name: "default", // главная страница
     // По-умолчанию (если не указан иной адрес): Контроллер - Home, метод контроллера - Index

@@ -1,5 +1,14 @@
 @model ShopCartViewModel
 
+@*@if (ViewBag.coincidence)
+{
+    <div class="alert alert-danger" role="alert"></div>
+    <h4 class="alert-heading">Внимание!</h4>
+    <p>Вы уже добавили этот товар в корзину</p>
+    <hr/>
+    <p class="mb-0">Выберите что-то ещё? <a class="nav-link" asp-controller="Sneakerses" asp-action="List">Ссылка на все товары</a>
+        </p>
+}*@
 <div class="container">
     @foreach(var i in Model.ShopCartModel.ShopCartItemModels)
     {

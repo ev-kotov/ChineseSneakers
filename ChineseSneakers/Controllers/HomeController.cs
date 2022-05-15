@@ -21,26 +21,27 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(string empSearch)
     {
+        HomeViewModel favoriteSneakerses;
         ViewData["GetEmployeeDetails"] = empSearch;
         var empQuery = from sm in _myAppDbContext.SneakersModel select  sm; 
         if (!string.IsNullOrEmpty(empSearch))
         {
             empQuery = empQuery.Where(sm =>
                 sm.Name.Contains(empSearch) || sm.SneakersCategoryModel.Name.Contains(empSearch));
+            
+            favoriteSneakerses = new HomeViewModel()
+            {
+                FavoriteSneakerses = await empQuery.AsNoTracking().ToListAsync()
+            };
         }
-
-        var favSneakers = new HomeViewModel()
+        else
         {
-            FavoriteSneakerses = await empQuery.AsNoTracking().ToListAsync()
-        };
-        return View(favSneakers);
-    }
-    public IActionResult Index()
-    {
-        var favSneakers = new HomeViewModel
-        {
-            FavoriteSneakerses = _sneakerses.FavoriteSneakersModels
-        };
-        return View(favSneakers);
+            favoriteSneakerses = new HomeViewModel
+            {
+                FavoriteSneakerses = _sneakerses.FavoriteSneakersModels
+            };
+        }
+        
+        return View(favoriteSneakerses);
     }
 }

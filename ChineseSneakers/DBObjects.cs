@@ -23,7 +23,7 @@ public class DBObjects
                     LongDescription = "",
                     Image = "/img/XTEP JLIN2 LIGHT.webp",
                     Price = 11224.30,
-                    IsFavorite = true,
+                    IsFavorite = false,
                     Available = true,
                     SneakersCategoryModel = Categories["Повседневные"]
                 },
@@ -68,7 +68,7 @@ public class DBObjects
                     LongDescription = "",
                     Image = "/img/1609322654443.png",
                     Price = 12000,
-                    IsFavorite = true,
+                    IsFavorite = false,
                     Available = false,
                     SneakersCategoryModel = Categories["Беговые"]
                 },
@@ -85,12 +85,12 @@ public class DBObjects
                     Price = 15000,
                     IsFavorite = true,
                     Available = true,
-                    SneakersCategoryModel = Categories["Беговые"]
+                    SneakersCategoryModel = Categories["Баскетбол"]
                 },
                 new SneakersModel
                 {
                     Article = "00003",
-                    Name = "Part1",
+                    Name = "Mikky 361",
                     Brand = "361",
                     Size = 40,
                     Female = "Man",
