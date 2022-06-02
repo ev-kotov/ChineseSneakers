@@ -1,12 +1,14 @@
 ﻿<!DOCTYPE html>
 
 <html>
+
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/Style.css">
     <title>@ViewBag.Title</title>
 </head>
+
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -19,7 +21,7 @@
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index"></a>
                     </li>
@@ -36,19 +38,21 @@
                         <a class="nav-link" href="/Sneakerses/List/Basketball">Баскетбольные</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="ShopCart" asp-action="Index" >Корзина</a>
+                        <a class="nav-link" asp-controller="ShopCart" asp-action="Index">Корзина</a>
                     </li>
                 </ul>
-                
+
                 <form class="d-flex" method="get" asp-controller="Home" asp-action="Index">
                     <input value="@ViewData["GetEmployeeDetails"]" name="EmpSearch" class="form-control me-2" type="search" placeholder="Что найти?" aria-label="Search">
                     <button value="Search" class="btn btn-outline-success" type="submit">Поиск</button>
-                    </form>
+                </form>
 
             </div>
         </div>
     </nav>
 </header>
+
+
 
 <div>
     <div class="container mt-5">

@@ -9,28 +9,28 @@ public class OrderModel // заказ
     public int Id { get; set; }
     
     [Display(Name = "Имя")]
-    [StringLength(20)]
+    [StringLength(50)]
     [Required(ErrorMessage ="Данная строка не может быть пустой")]
     public string? Name { get; set; }
     
     [Display(Name = "Фамилия")]
-    [StringLength(20)]
+    [StringLength(50)]
     [Required(ErrorMessage = "Данная строка не может быть пустой")]
     public string? Surname { get; set; }
     
     [Display(Name = "Адрес")]
-    [StringLength(20)]
+    [StringLength(500)]
     [Required(ErrorMessage = "Данная строка не может быть пустой")]
     public string? Address { get; set; }
     
     [Display(Name = "Номер телефона")]
-    [StringLength(20)]
+    [StringLength(100)]
     [DataType(DataType.PhoneNumber)]
     [Required(ErrorMessage = "Данная строка не может быть пустой")]
     public string? Phone { get; set; }
     
     [Display(Name = "E-mail")]
-    [StringLength(20)]
+    [StringLength(100)]
     [DataType(DataType.EmailAddress)]
     [Required(ErrorMessage = "Данная строка не может быть пустой")]
     public string? Email { get; set; }

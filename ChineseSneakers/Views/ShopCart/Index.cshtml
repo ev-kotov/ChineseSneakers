@@ -1,6 +1,8 @@
 @model ShopCartViewModel
 
-@*@if (ViewBag.coincidence)
+<h3>Корзина</h3>
+
+@if (ViewBag.coincidence)
 {
     <div class="alert alert-danger" role="alert"></div>
     <h4 class="alert-heading">Внимание!</h4>
@@ -8,13 +10,14 @@
     <hr/>
     <p class="mb-0">Выберите что-то ещё? <a class="nav-link" asp-controller="Sneakerses" asp-action="List">Ссылка на все товары</a>
         </p>
-}*@
+}
 <div class="container">
-    @foreach(var i in Model.ShopCartModel.ShopCartItemModels)
+    @foreach(var i in Model.ShopCartItemModels)
     {
-        <div class="alert alert-warning mt-3">
+        <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
             <b>Кроссовки:</b> @i.SneakersModel.Name <br />
             <b>Цена: </b> @i.SneakersModel.Price.ToString("c")
+            <a class="btn-close" aria-label="Close" asp-controller="ShopCart" asp-action="DeleteWithoutCart" asp-route-id="@i.Id"></a>
         </div>
     }
     <hr />

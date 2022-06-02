@@ -8,11 +8,14 @@ public class OrderController : Controller
 {
     private readonly IOrder _iOrder;
     private readonly ShopCartModel _shopCartModel;
-    
-    public OrderController(IOrder iOrder, ShopCartModel shopCartModel)
+    private readonly ILogger<OrderController> _logger;
+    private readonly Service _service;
+
+    public OrderController(IOrder iOrder, ShopCartModel shopCartModel, Service service)
     {
         _iOrder = iOrder;
         _shopCartModel = shopCartModel;
+        _service = service;
     }
 
     public IActionResult CheckOut() // Функция IActionResult позволяет принимать данные
@@ -33,6 +36,7 @@ public class OrderController : Controller
         if (ModelState.IsValid) // все проверки пройдены?
         {
             _iOrder.CreateOrder(orderModel); // создаем заказ
+            _service.SendEmail(orderModel);
             return RedirectToAction("Complete");
         }
         return View(orderModel); // перезагрузить страницу заказа, т.к. проверки не пройдены

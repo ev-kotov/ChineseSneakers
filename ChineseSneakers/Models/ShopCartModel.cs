@@ -34,6 +34,16 @@ public class ShopCartModel
         _myAppDbContext.SaveChanges();
     }
     
+    public void DeleteWithoutCart(int id)
+    {
+        _myAppDbContext.ShopCartItemModel.Remove(new ShopCartItemModel
+        {
+            Id = id
+        });
+
+        _myAppDbContext.SaveChanges();
+    }
+    
     public List<ShopCartItemModel> GetShopCartItemModels()
     {
         return _myAppDbContext.ShopCartItemModel.Where(scim => scim.ShopCartId == ShopCartId).Include(scim => scim.SneakersModel).ToList();
