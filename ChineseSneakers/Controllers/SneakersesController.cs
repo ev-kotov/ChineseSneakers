@@ -28,6 +28,7 @@ public class SneakersesController : Controller
         if(string.IsNullOrEmpty(category)) // выводим все кроссы
         {
             sneakerses = _sneakerses.SneakersModels.OrderBy(sm => sm.Id);
+            currCategory = "Все кроссовки";
         }
         else
         {

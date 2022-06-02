@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using ChineseSneakers.Interfaces;
 using ChineseSneakers.Models;
 using ChineseSneakers.Repository;
@@ -16,24 +17,51 @@ public class ShopCartController : Controller
         _shopCartModel = shopCartModel;
     }
 
-    public ViewResult Index()
+    public ViewResult Index(bool coincidence = false)
     {
-        _shopCartModel.ShopCartItemModels = _shopCartModel.GetShopCartItemModels();
-        var obj = new ShopCartViewModel
+        ShopCartViewModel ff = new ShopCartViewModel()
         {
-            ShopCartModel = _shopCartModel
+            ShopCartItemModels = _shopCartModel.GetShopCartItemModels()
         };
 
-        return View(obj);
+        ViewBag.coincidence = coincidence;
+        
+        return View(ff);
     }
     
     public RedirectToActionResult AddToCart(int id)
     {
-        var sneakersModel = _sneakerses.SneakersModels.FirstOrDefault(sm => sm.Id == id);
-        if (sneakersModel != null)
+        bool coincidence = false;
+
+        if (_sneakerses.SneakersModels.FirstOrDefault(model => model.Id == id) != null)
         {
-            _shopCartModel.AddToCart(sneakersModel);
+            _shopCartModel.ShopCartItemModels = _shopCartModel.GetShopCartItemModels();
+
+            foreach (var scm in _shopCartModel.ShopCartItemModels)
+            {
+                if (scm.SneakersModel.Id == id)
+                {
+                    coincidence = true;
+                    break;
+                }
+            }
+            
+            if(!coincidence)
+                _shopCartModel.AddToCart(_sneakerses.SneakersModels.FirstOrDefault(i=>i.Id==id));
         }
+
+        if (coincidence)
+        {
+            return RedirectToAction("Index", new {coincidence = true});
+        }
+        else
+        {
+            return RedirectToAction("Index");
+        }
+    }
+    public RedirectToActionResult DeleteWithoutCart(int id)
+    {
+        _shopCartModel.DeleteWithoutCart(id);
         return RedirectToAction("Index");
     }
 }

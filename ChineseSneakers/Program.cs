@@ -27,6 +27,8 @@ builder.Services.AddDataProtection()
 builder.Services.AddTransient<ISneakerses, SneakersesRepository>();
 builder.Services.AddTransient<ISneakersCategory, SneakersCategoryRepository>();
 builder.Services.AddTransient<IOrder, OrderRepository>();
+builder.Services.AddTransient<Service>();
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => ShopCartModel.GetShopCartModel(sp));
 
